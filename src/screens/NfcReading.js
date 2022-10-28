@@ -1,32 +1,22 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native-elements';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Pressable, StyleSheet, View} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
-export default function Entry({navigation, screenProps}) {
+export default function NfcReading({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textSmall}>trapezoid</Text>
-
-      <View style={styles.headerText}>
-        <Text style={styles.textBig}>nfc crypto wallet</Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.textSmall}>READ NFC</Text>
       </View>
-      <Pressable onPress={() => navigation.navigate('NfcReadingScreen')}>
-        <Text style={styles.importSeedPhrase}>TEST NFC READING</Text>
-      </Pressable>
       <Button
         buttonStyle={styles.btn}
         onPress={() => navigation.navigate('')}
-        title="Create a New Wallet"
+        title="Go to Your Wallet"
       />
-      <Pressable onPress={() => navigation.navigate('SeedPhraseImportScreen')}>
-        <Text style={styles.importSeedPhrase}>
-          Import Wallet with Seed Phrase
-        </Text>
-      </Pressable>
     </View>
   );
 }
@@ -37,29 +27,18 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
   },
-  headerText: {
+  headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 200,
+
     marginTop: 50,
   },
-  textBig: {
+  textSmall: {
     fontFamily: 'Anek Kannada',
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: 66,
     lineHeight: 66,
-    textTransform: 'lowercase',
-    /* Greys/White */
-    color: '#FF57A8',
-  },
-  textSmall: {
-    fontFamily: 'Anek Kannada',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 26,
-    lineHeight: 66,
-
     textTransform: 'lowercase',
     /* Greys/White */
     color: '#FF57A8',
@@ -71,7 +50,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     gap: 71,
-    marginTop: 170,
+    marginTop: 270,
     backgroundColor: '#FF57A8',
     borderRadius: 54,
   },

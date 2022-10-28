@@ -11,6 +11,7 @@ import PasswordCreation from './src/screens/PasswordCreation';
 import SeedPhraseImport from './src/screens/SeedPhraseImport';
 import CreateWalletLoading from './src/screens/CreateWalletLoading';
 import Congrats from './src/screens/CongratsScreen';
+import NfcReading from './src/screens/NfcReading';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,7 @@ function OnboardingStackScreen() {
         name="CreateWalletLoadingScreen"
         component={CreateWalletLoading}
       />
+      <OnboardingStack.Screen name="NfcReadingScreen" component={NfcReading} />
       <OnboardingStack.Screen name="CongratsScreen" component={Congrats} />
     </OnboardingStack.Navigator>
   );
