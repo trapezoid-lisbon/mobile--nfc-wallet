@@ -22,7 +22,7 @@ export default function Drawer({navigation, screenProps}) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.reviewContent}>
-        <View marginTop={'xl'} alignItems="flex-end" padding={'screenPadding'}>
+        <View marginTop={20} alignItems="flex-end" padding={30}>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => {
@@ -31,12 +31,13 @@ export default function Drawer({navigation, screenProps}) {
         </View>
         <View
           flex={1}
-          backgroundColor="mainBackground"
-          paddingHorizontal={'screenPadding'}
-          paddingBottom={'xxl'}>
+          backgroundColor="white"
+          paddingHorizontal={30}
+          paddingBottom={30}>
           {renderSwapReviewContent()}
         </View>
       </ScrollView>
+      <Text>REVIEW DRAWER</Text>
     </View>
   );
 }

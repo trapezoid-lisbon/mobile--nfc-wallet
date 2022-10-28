@@ -1,18 +1,24 @@
-/* import React, {useState} from 'react';
+import React, {useState} from 'react';
 import {Text} from 'react-native-elements';
-import {ActivityIndicator, Pressable, StyleSheet, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
-//import NfcManager, {NfcTech, Ndef} from 'react-native-nfc-manager';
+import NfcManager, {NfcTech, Ndef} from 'react-native-nfc-manager';
 import Drawer from '../components/drawer';
-
 export default function NfcReading({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
-  const [showDrawer, setShowDrawer] = useState([]);
+  const [showDrawer, setShowDrawer] = useState(false);
 
+  console.log(showDrawer, 'SHOW DRAWER');
   // Pre-step, call this before any NFC operations
-  //NfcManager.start();
+  NfcManager.start();
 
   async function readNdef() {
     setShowDrawer(true);
@@ -21,7 +27,7 @@ export default function NfcReading({navigation, screenProps}) {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
-      console.warn('Tag found', tag);
+      console.warn('Tag found', tag, 'PAYLOAD:', tag.ndefMessage[0].payload);
     } catch (ex) {
       console.warn('Oops!', ex);
     } finally {
@@ -30,19 +36,20 @@ export default function NfcReading({navigation, screenProps}) {
     }
   }
 
-  async function writeNdef({type, value}) {
+  const writeNdef = async (type, value) => {
     let result = false;
 
+    console.log('TYPE, VALUE', type, value);
     try {
       // STEP 1
       await NfcManager.requestTechnology(NfcTech.Ndef);
-
       const bytes = Ndef.encodeMessage([Ndef.textRecord('Hello NFC')]);
 
       if (bytes) {
         await NfcManager.ndefHandler // STEP 2
           .writeNdefMessage(bytes); // STEP 3
         result = true;
+        Alert.alert('Successfully written to NFC!');
       }
     } catch (ex) {
       console.warn(ex);
@@ -52,19 +59,23 @@ export default function NfcReading({navigation, screenProps}) {
     }
 
     return result;
-  }
-
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.textSmall}>READ NFC</Text>
+        <Text style={styles.textSmall}>scan nfc</Text>
       </View>
       <Button
         buttonStyle={styles.btn}
         onPress={() => readNdef()}
-        title="Scan tag"
+        title="Read Nfc"
       />
-      {setShowDrawer ? <Drawer /> : null}
+      <Button
+        buttonStyle={styles.btnTwo}
+        onPress={() => writeNdef()}
+        title="Write Nfc"
+      />
+      {showDrawer ? <Drawer /> : null}
     </View>
   );
 }
@@ -88,6 +99,7 @@ export const styles = StyleSheet.create({
     fontSize: 66,
     lineHeight: 66,
     textTransform: 'lowercase',
+    /* Greys/White */
     color: '#FF57A8',
   },
 
@@ -102,6 +114,17 @@ export const styles = StyleSheet.create({
     borderRadius: 54,
   },
 
+  btnTwo: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    gap: 71,
+    marginTop: 30,
+    backgroundColor: '#FF57A8',
+    borderRadius: 54,
+  },
+
   importSeedPhrase: {
     fontFamily: 'Anek Kannada',
     fontStyle: 'normal',
@@ -109,8 +132,9 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 66,
     textTransform: 'lowercase',
+    /* Greys/White */
     color: '#FF57A8',
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-}); */
+});
