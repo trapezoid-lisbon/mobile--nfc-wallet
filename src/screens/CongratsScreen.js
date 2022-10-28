@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native-elements';
-import {ActivityIndicator, Pressable, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
 export default function Congrats({navigation, screenProps}) {

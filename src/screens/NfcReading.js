@@ -15,7 +15,7 @@ export default function NfcReading({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [setQrScanner, setShowQRScanner] = useState(false);
+  const [showQRScanner, setShowQRScanner] = useState(false);
 
   console.log(showDrawer, 'SHOW DRAWER');
   // Pre-step, call this before any NFC operations
@@ -63,6 +63,26 @@ export default function NfcReading({navigation, screenProps}) {
   };
   return (
     <View style={styles.container}>
+      <View style={styles.container}>
+        {showQRScanner ? (
+          <QRCodeScanner
+            onRead={onSuccess}
+            flashMode={RNCamera.Constants.FlashMode.torch}
+            topContent={'Interact with dApp'}
+            bottomContent={
+              <TouchableOpacity style={styles.buttonTouchable}>
+                <Text style={styles.buttonText}>OK. Got it!</Text>
+              </TouchableOpacity>
+            }
+          />
+        ) : (
+          <View style={styles.container}>
+            <Pressable onPress={() => setShowQRScanner(true)}>
+              <Text>QR SCANNER!!</Text>
+            </Pressable>
+          </View>
+        )}
+      </View>
       <View style={styles.headerContainer}>
         <Text style={styles.textSmall}>scan nfc</Text>
       </View>
