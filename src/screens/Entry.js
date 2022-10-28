@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native-elements';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, View} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
 export default function Entry({navigation, screenProps}) {
@@ -19,7 +19,7 @@ export default function Entry({navigation, screenProps}) {
       </Pressable>
       <Button
         buttonStyle={styles.btn}
-        onPress={() => navigation.navigate('')}
+        onPress={() => Alert.alert('Feature not implemented yet!')}
         title="Create a New Wallet"
       />
       <Pressable onPress={() => navigation.navigate('SeedPhraseImportScreen')}>
