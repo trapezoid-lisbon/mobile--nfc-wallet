@@ -15,6 +15,7 @@ export default function NfcReading({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [setQrScanner, setShowQRScanner] = useState(false);
 
   console.log(showDrawer, 'SHOW DRAWER');
   // Pre-step, call this before any NFC operations
