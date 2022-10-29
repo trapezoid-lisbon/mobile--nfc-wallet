@@ -97,7 +97,7 @@ export default function NfcReading({navigation, screenProps}) {
         ) : (
           <View style={styles.container}>
             <Pressable onPress={() => setShowQRScanner(true)}>
-              <Text color={'black'}>QR SCANNER!!</Text>
+              <Text>QR SCANNER!!</Text>
             </Pressable>
           </View>
         )}

@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "postinstall": "node_modules/.bin/rn-nodeify --install crypto --hack && node_modules/.bin/rn-nodeify --install stream --hack"  },
+    "postinstall": "rn-nodeify --install 'crypto,stream,assert,fs,os,path,tty,http,https,url' --hack && node patch.js"
+  },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
@@ -52,7 +53,11 @@
     "tty-browserify": "^0.0.0",
     "url": "^0.10.3",
     "util": "^0.10.4",
-    "vm-browserify": "^0.0.4"
+    "vm-browserify": "^0.0.4",
+    "@ethersproject/shims": "^5.6.0",
+    "@liquality/cryptoassets": "1.15.1",
+    "@liquality/types": "1.13.12",
+    "@liquality/wallet-core": "1.30.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

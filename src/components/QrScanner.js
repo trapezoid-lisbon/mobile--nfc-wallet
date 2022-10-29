@@ -29,7 +29,7 @@ export default function QrScanner({showQRScanner, setShowQRScanner}) {
       ) : (
         <View style={styles.container}>
           <Pressable onPress={() => setShowQRScanner(true)}>
-            <Text color={'black'}>QR SCANNER!!</Text>
+            <Text>QR SCANNER!!</Text>
           </Pressable>
         </View>
       )}
