@@ -5,7 +5,6 @@ import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
 export default function Entry({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
-  const [data, setData] = useState([]);
 
   return (
     <View style={styles.container}>

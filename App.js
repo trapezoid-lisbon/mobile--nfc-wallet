@@ -12,6 +12,7 @@ import SeedPhraseImport from './src/screens/SeedPhraseImport';
 import CreateWalletLoading from './src/screens/CreateWalletLoading';
 import Congrats from './src/screens/CongratsScreen';
 import NfcReading from './src/screens/NfcReading';
+import ApproveInjectionScreen from './src/components/ApproveInjection';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,10 @@ function OnboardingStackScreen() {
       <OnboardingStack.Screen
         name="CreateWalletLoadingScreen"
         component={CreateWalletLoading}
+      />
+      <OnboardingStack.Screen
+        name="ApproveInjectionScreen"
+        component={ApproveInjectionScreen}
       />
       <OnboardingStack.Screen name="NfcReadingScreen" component={NfcReading} />
       <OnboardingStack.Screen name="CongratsScreen" component={Congrats} />

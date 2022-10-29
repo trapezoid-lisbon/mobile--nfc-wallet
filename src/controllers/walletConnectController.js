@@ -34,6 +34,7 @@ export default class WalletConnectController {
         throw error;
       }
 
+      console.log(payload, 'PAYLOAD wc', error, 'error WC');
       emitterController.emit(ON_SESSION_REQUEST, payload);
 
       emitterController.on(OFF_SESSION_REQUEST, address => {

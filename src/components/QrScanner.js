@@ -6,21 +6,26 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
+//COMPONENT NOT CURRENTLY USED
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 
 export default function QrScanner({showQRScanner, setShowQRScanner}) {
   return (
     <View style={styles.container}>
       {showQRScanner ? (
-        <QRCodeScanner
-          onRead={onSuccess}
-          flashMode={RNCamera.Constants.FlashMode.torch}
-          topContent={'Interact with dApp'}
-          bottomContent={
-            <TouchableOpacity style={styles.buttonTouchable}>
-              <Text style={styles.buttonText}>OK. Got it!</Text>
-            </TouchableOpacity>
-          }
-        />
+        <View>
+          <QRCodeScanner
+            onRead={onSuccess}
+            flashMode={RNCamera.Constants.FlashMode.torch}
+            topContent={'Interact with dApp'}
+            bottomContent={
+              <TouchableOpacity style={styles.buttonTouchable}>
+                <Text style={styles.buttonText}>OK. Got it!</Text>
+              </TouchableOpacity>
+            }
+          />
+        </View>
       ) : (
         <View style={styles.container}>
           <Pressable onPress={() => setShowQRScanner(true)}>

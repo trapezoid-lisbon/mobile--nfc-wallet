@@ -5,17 +5,30 @@ import {
   Alert,
   Pressable,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
+import WalletConnectController from '../controllers/walletConnectController';
+
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
 import NfcManager, {NfcTech, Ndef} from 'react-native-nfc-manager';
 import Drawer from '../components/drawer';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
+
 export default function NfcReading({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
   const [showDrawer, setShowDrawer] = useState(false);
   const [showQRScanner, setShowQRScanner] = useState(false);
+
+  const onSuccess = e => {
+    console.log(e, 'SUCCESS READING QR');
+    new WalletConnectController(e.data);
+    navigation.navigate('ApproveInjectionScreen', {uri: e.data});
+    setShowQRScanner(false);
+  };
 
   console.log(showDrawer, 'SHOW DRAWER');
   // Pre-step, call this before any NFC operations
@@ -68,7 +81,13 @@ export default function NfcReading({navigation, screenProps}) {
           <QRCodeScanner
             onRead={onSuccess}
             flashMode={RNCamera.Constants.FlashMode.torch}
-            topContent={'Interact with dApp'}
+            topContent={
+              <Text style={styles.centerText}>
+                Go to{' '}
+                <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text>{' '}
+                on your computer and scan the QR code.
+              </Text>
+            }
             bottomContent={
               <TouchableOpacity style={styles.buttonTouchable}>
                 <Text style={styles.buttonText}>OK. Got it!</Text>
@@ -78,7 +97,7 @@ export default function NfcReading({navigation, screenProps}) {
         ) : (
           <View style={styles.container}>
             <Pressable onPress={() => setShowQRScanner(true)}>
-              <Text>QR SCANNER!!</Text>
+              <Text color={'black'}>QR SCANNER!!</Text>
             </Pressable>
           </View>
         )}
