@@ -3,14 +3,15 @@ import {Text} from 'react-native-elements';
 import {StyleSheet, View} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
-export default function Congrats({navigation, screenProps}) {
+
+export default function Settings({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.textSmall}>Congrats!</Text>
+        <Text style={styles.textSmall}>Settings Scren</Text>
       </View>
       <Button
         buttonStyle={styles.btn}

@@ -97,7 +97,9 @@ export default function NfcReading({navigation, screenProps}) {
         ) : (
           <View style={styles.container}>
             <Pressable onPress={() => setShowQRScanner(true)}>
-              <Text>QR SCANNER!!</Text>
+              <Text style={styles.walletConnectQR}>
+                wallet-connect QR dapp injection
+              </Text>
             </Pressable>
           </View>
         )}
@@ -126,6 +128,18 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
   },
+  walletConnectQR: {
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 15,
+    lineHeight: 15,
+    textTransform: 'lowercase',
+    /* Greys/White */
+    color: '#FF57A8',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+  },
+
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',

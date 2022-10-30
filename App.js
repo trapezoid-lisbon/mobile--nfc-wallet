@@ -13,7 +13,13 @@ import CreateWalletLoading from './src/screens/CreateWalletLoading';
 import Congrats from './src/screens/CongratsScreen';
 import NfcReading from './src/screens/NfcReading';
 import ApproveInjectionScreen from './src/components/ApproveInjection';
+import {setupWallet} from '@liquality/wallet-core';
+import defaultOptions from '@liquality/wallet-core/dist/src/walletOptions/defaultOptions';
+import Settings from './src/screens/Settings';
 
+const wallet = setupWallet({
+  ...defaultOptions,
+});
 const Tab = createBottomTabNavigator();
 
 const MainStack = createNativeStackNavigator();
@@ -25,6 +31,8 @@ function HomeStackScreen() {
         headerShown: false,
       }}>
       <MainStack.Screen name="HomeScreen" component={Home} />
+      <MainStack.Screen name="SettingsScreen" component={Settings} />
+      <MainStack.Screen name="NfcReadingScreen" component={NfcReading} />
     </MainStack.Navigator>
   );
 }
@@ -50,12 +58,12 @@ function OnboardingStackScreen() {
         name="ApproveInjectionScreen"
         component={ApproveInjectionScreen}
       />
-      <OnboardingStack.Screen name="NfcReadingScreen" component={NfcReading} />
       <OnboardingStack.Screen name="CongratsScreen" component={Congrats} />
     </OnboardingStack.Navigator>
   );
 }
 
+console.log(wallet.state);
 const App: () => Node = () => {
   return (
     <DataContext.Provider
@@ -64,9 +72,7 @@ const App: () => Node = () => {
         someValueNrTwo: 'hallo',
       }}>
       <NavigationContainer>
-        {/*         {loginState.userToken !== null ? (
-         */}
-        {0 !== 0 ? (
+        {wallet.state ? (
           <Tab.Navigator
             initialRouteName="Home"
             tabBarOptions={{
@@ -82,24 +88,16 @@ const App: () => Node = () => {
               }}
               component={HomeStackScreen}
             />
-            {/*  <Tab.Screen
-          name="AboutScreen"
-          options={{
-            headerShown: false,
+            <Tab.Screen
+              name="SettingsScreen"
+              options={{
+                headerShown: false,
 
-            tabBarLabel: 'Info',
-            tabBarIcon: ({color}) => (
-              <MaterialCommunityIcons
-                name="information"
-                color={color}
-                size={26}
-              />
-            ),
-          }}
-          component={AboutStackScreen}
-        />
-
-   */}
+                tabBarLabel: 'Info',
+                tabBarIcon: ({color}) => <Text>SETTINGS</Text>,
+              }}
+              component={Settings}
+            />
           </Tab.Navigator>
         ) : (
           <OnboardingStackScreen />
