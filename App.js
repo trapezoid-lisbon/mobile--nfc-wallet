@@ -63,7 +63,7 @@ function OnboardingStackScreen() {
   );
 }
 
-console.log(wallet.state);
+console.log(wallet.state.activeWalletId, 'wats wallt state?');
 const App: () => Node = () => {
   return (
     <DataContext.Provider
@@ -72,7 +72,7 @@ const App: () => Node = () => {
         someValueNrTwo: 'hallo',
       }}>
       <NavigationContainer>
-        {wallet.state ? (
+        {wallet.state.activeWalletId ? (
           <Tab.Navigator
             initialRouteName="Home"
             tabBarOptions={{

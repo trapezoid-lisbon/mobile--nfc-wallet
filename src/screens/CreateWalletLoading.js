@@ -34,7 +34,7 @@ export default function CreateWalletLoading({navigation, screenProps}) {
     try {
       (async () => {
         await wallet.dispatch.createWallet({
-          key: 'satoshi',
+          key: 'hellocrypto',
           mnemonic:
             'leave satisfy swear sphere first brush hub magnet liar south toward mule',
           imported: true,

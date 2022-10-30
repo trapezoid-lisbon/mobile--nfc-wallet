@@ -3,21 +3,38 @@ import {Text} from 'react-native-elements';
 import {StyleSheet, View} from 'react-native';
 import {DataContext} from '../services/DataContext';
 import {Button} from 'react-native-elements';
+import {setupWallet} from '@liquality/wallet-core';
+import defaultOptions from '@liquality/wallet-core/dist/src/walletOptions/defaultOptions';
 
+const wallet = setupWallet({
+  ...defaultOptions,
+});
 export default function Home({navigation, screenProps}) {
   const {someValue} = React.useContext(DataContext);
   const [data, setData] = useState([]);
 
+  const unlockWallet = async () => {
+    await wallet.dispatch.unlockWallet({key: 'hellocrypto'});
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.textSmall}>Wallet Home Overview</Text>
       </View>
-      <Button
-        buttonStyle={styles.btn}
-        onPress={() => navigation.navigate('NfcReadingScreen')}
-        title="Make NFC payment"
-      />
+
+      <View padding={30} marginTop={20}>
+        <Button
+          buttonStyle={styles.btn}
+          onPress={unlockWallet}
+          title="Unlock"
+        />
+        <Button
+          marginTop={20}
+          buttonStyle={styles.btn}
+          onPress={() => navigation.navigate('NfcReadingScreen')}
+          title="Make NFC payment"
+        />
+      </View>
     </View>
   );
 }
@@ -51,7 +68,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     gap: 71,
-    marginTop: 270,
     backgroundColor: '#FF57A8',
     borderRadius: 54,
   },
